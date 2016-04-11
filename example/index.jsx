@@ -41,6 +41,7 @@ class Example extends React.Component {
 						left={100}
 						top={100}
 					/>
+
 				</Canvas>
 
 				<button onClick={this.changeColor.bind(this)}>Color</button>

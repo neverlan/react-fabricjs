@@ -3,7 +3,7 @@
 import React, {PropTypes} from 'react';
 import FabricObject from '../base/Object.jsx';
 import {fabric} from 'fabric-webpack';
-import diff from 'deep-diff';
+// import diff from 'deep-diff';
 const PI = Math.PI;
 
 export default class Circle extends FabricObject {

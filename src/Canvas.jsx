@@ -11,6 +11,9 @@ export default class Canvas extends React.Component {
 			canvas: null,
 		};
 
+		this.refsLookup = {};
+		this.ref = {};
+
 		this.absolutePan = (point) => this.state.canvas &&
 			this.state.canvas.absolutePan(point);
 		this.bringForward = (object, intersecting) => this.state.canvas &&
@@ -74,24 +77,26 @@ export default class Canvas extends React.Component {
 
 	componentDidMount() {
 		const canvas = new fabric.Canvas(this.props.id);
-		this.setState({canvas});
 
-		React.Children.map(this.props.children, (_, index) => {
-			const object = this.refs[`layer${index}`].draw();
-			canvas.add(object);
+
+		this.setState({canvas}, () => {
+			Object.keys(this.ref).forEach(key => {
+				const ref = this.ref[key];
+				const object = ref.draw();
+				canvas.add(object);
+			});
 		});
 	}
 
-	getChild(index) {
-		return this.refs[`layer${index}`];
+	getChild(ref) {
+		return this.ref[ref];
 	}
 
 	componentWillReceiveProps(nextProps) {
-
 	}
 
 	componentDidUpdate(prevProps, prevState) {
-
+		this.state.canvas && this.state.canvas.renderAll();
 	}
 
 	componentWillUnmount() {
@@ -105,9 +110,16 @@ export default class Canvas extends React.Component {
 			<div>
 				<canvas id={id}/>
 				{
+					this.state.canvas &&
 					React.Children.map(
 						children,
-						(child, i) => React.cloneElement(child, {ref: `layer${i}`, }))
+						(child, i) => React.cloneElement(child, {
+							ref: (c) => {
+								this.ref[child.ref] = c;
+								// this.refsLookup[child.ref] = `layer${i}`;
+							},
+						})
+					)
 				}
 			</div>
 		);
