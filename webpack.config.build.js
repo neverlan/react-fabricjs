@@ -1,6 +1,8 @@
 var path = require('path');
 var webpack = require('webpack');
-var autoprefixer = require('autoprefixer');
+// var autoprefixer = require('autoprefixer');
+var minimize = process.argv.indexOf('--minimize') !== -1;
+
 
 var config = {
 	devtool: 'eval',
@@ -60,5 +62,18 @@ var config = {
 		noParse: [],
 	}
 };
+
+if (minimize) {
+	config.plugins.push(
+		new webpack.optimize.UglifyJsPlugin({
+			compressor: {
+				warnings: false
+			}
+		})
+	);
+	config.devtool = 'source-map';
+	config.output.filename = "[name].min.js";
+}
+
 
 module.exports = config;

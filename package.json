@@ -10,20 +10,20 @@
   ],
   "license": "MIT",
   "scripts": {
-    "clean": "rimraf dist/public",
-    "build:webpack": "cross-env NODE_ENV=production webpack --config webpack.config.prod.js",
-    "build": "npm run clean && npm run build:webpack",
-    "build:test": "npm run clean && cross-env NODE_ENV=test webpack --config webpack.config.test.js",
-    "start": "node devServer.js",
-    "test": "node_modules/.bin/nightwatch -e travisci",
-    "e2e": "node_modules/.bin/nightwatch -e firefox"
+    "clean": "rimraf lib",
+    "build:uncompressed": "cross-env NODE_ENV=production webpack --config webpack.config.build.js",
+    "build:minified": "cross-env NODE_ENV=production webpack --config webpack.config.build.js --minimize",
+    "build": "npm run clean && npm run build:uncompressed && npm run build:minified ",
+    "start": "node devServer.js"
+  },
+  "peerDependencies": {
+    "react": "^0.14.0 || ^15.0.0",
+    "react-dom": "^0.14.0 || ^15.0.0"
   },
   "dependencies": {
     "classnames": "~2.1.2",
     "fabric-webpack": "~1.6.0-rc.1",
-    "object-assign": "^4.0.1",
-    "react": "~0.14",
-    "react-dom": "~0.14.0"
+    "object-assign": "~4.0.1"
   },
   "devDependencies": {
     "autoprefixer": "~6.3.1",
@@ -48,6 +48,8 @@
     "node-sass": "~3.4.2",
     "postcss-loader": "~0.8.0",
     "rimraf": "~2.5.1",
+    "react": "~0.14",
+    "react-dom": "~0.14.0",
     "sass-loader": "~3.1.2",
     "style-loader": "~0.13.0",
     "url-loader": "~0.5.7",
