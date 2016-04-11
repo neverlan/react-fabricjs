@@ -3,12 +3,6 @@
 import React, { PropTypes } from 'react';
 import {fabric} from 'fabric-webpack';
 
-// const stateProperties = (
-// 	'top left width height scaleX scaleY flipX flipY originX originY transformMatrix ' +
-// 	'stroke strokeWidth strokeDashArray strokeLineCap strokeLineJoin strokeMiterLimit ' +
-// 	'angle opacity fill fillRule globalCompositeOperation shadow clipTo visible backgroundColor'
-// ).split(' ');
-
 export default class FabricObject extends React.Component {
 	constructor(props, context) {
 		super(props, context);
@@ -210,17 +204,6 @@ export default class FabricObject extends React.Component {
 		this.translateToOriginPoint = (point, originX, originY) => this.state.object &&
 			this.state.object.translateToOriginPoint(point, originX, originY);
 	}
-
-	// draw() {
-	// 	const object = new fabric.Circle(this.props.options);
-	// 	this.setState({object});
-
-		// for(var propertyName in object) {
-		// 	console.log(propertyName)
-		// }
-
-	// 	return object;
-	// }
 
 	render() {
 		return <div />;

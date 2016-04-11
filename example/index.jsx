@@ -6,12 +6,9 @@ import {fabric} from 'fabric-webpack';
 
 import Canvas from 'react-fabricjs/Canvas';
 import Circle from 'react-fabricjs/shape/Circle';
+import Ellipse from 'react-fabricjs/shape/Ellipse';
 
 class Example extends React.Component {
-
-	componentDidMount() {
-		console.log(new fabric.Circle({radius: 20, fill: 'green', left: 100, top: 100}))
-	}
 
 	render() {
 		return (
@@ -24,6 +21,13 @@ class Example extends React.Component {
 						top={100}
 						ref="circle"
 					/>
+				<Ellipse
+					top={0}
+					left={20}
+					rx={10}
+					ry={30}
+					fill="red"
+				/>
 				{/*
 					<Circle
 						radius={20}

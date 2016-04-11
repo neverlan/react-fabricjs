@@ -14,14 +14,20 @@ export default class Circle extends FabricObject {
 
 		this.draw = this.draw.bind(this);
 
+		this.toObject = (propertiesToInclude) => this.state.object &&
+			this.state.object.toObject(propertiesToInclude);
+		this.toSVG = (reviver) => this.state.object &&
+			this.state.object.toSVG(reviver);
 		this.getRadiusX = () => this.state.object &&
 			this.state.object.getRadiusX();
 		this.getRadiusY = () => this.state.object &&
 			this.state.object.getRadiusY();
 		this.setRadius = (value) => this.state.object &&
 			this.state.object.setRadius(value);
-		this.toSVG = (reviver) => this.state.object &&
-			this.state.object.toSVG(reviver);
+		this.renderf = () => this.state.object &&
+			this.state.object.render();
+		this.complexity = () => 1;
+
 	}
 
 	draw() {
