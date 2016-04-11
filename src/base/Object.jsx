@@ -2,6 +2,7 @@
 
 import React, { PropTypes } from 'react';
 import {fabric} from 'fabric-webpack';
+import diff from 'deep-diff';
 
 export default class FabricObject extends React.Component {
 	constructor(props, context) {
@@ -205,8 +206,18 @@ export default class FabricObject extends React.Component {
 			this.state.object.translateToOriginPoint(point, originX, originY);
 	}
 
+	componentWillReceiveProps(nextProps) {
+		const difference = diff(this.props, nextProps);
+		if (difference) {
+			difference.forEach(comparsion => {
+				this.set(comparsion.path[0], comparsion.rhs);
+			});
+		}
+	}
+
 	render() {
-		return <div />;
+		const {...props} = this.props;
+		return <div {...props} />;
 	}
 }
 
@@ -333,7 +344,7 @@ FabricObject.defaultProps = {
 	lockSkewingY: false,
 	lockScalingFlip: false,
 
-	oCoords: null,
+	// oCoords: null,
 
 	stateProperties:  (
 		'top left width height scaleX scaleY flipX flipY originX originY transformMatrix ' +

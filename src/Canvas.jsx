@@ -11,66 +11,65 @@ export default class Canvas extends React.Component {
 			canvas: null,
 		};
 
-		this.absolutePan = (point) => this.state.canvas && 
+		this.absolutePan = (point) => this.state.canvas &&
 			this.state.canvas.absolutePan(point);
-		this.bringForward = (object, intersecting) => this.state.canvas && 
+		this.bringForward = (object, intersecting) => this.state.canvas &&
 			this.state.canvas.bringForward(object, intersecting);
-		this.bringToFront = (object) => this.state.canvas && 
+		this.bringToFront = (object) => this.state.canvas &&
 			this.state.canvas.bringToFront(object);
-		this.calcOffset = () => this.state.canvas && 
+		this.calcOffset = () => this.state.canvas &&
 			this.state.canvas.calcOffset();
-		this.calcOffset = () => this.state.canvas && 
-			this.state.canvas.calcOffset();
-		this.calcOffset = () => this.state.canvas && 
-			this.state.canvas.calcOffset();
-		this.calcOffset = () => this.state.canvas && 
-			this.state.canvas.calcOffset();
-		this.calcOffset = () => this.state.canvas && 
-			this.state.canvas.calcOffset();
-		this.calcOffset = () => this.state.canvas && 
-			this.state.canvas.calcOffset();
-		this.calcOffset = () => this.state.canvas && 
-			this.state.canvas.calcOffset();
-		this.calcOffset = () => this.state.canvas && 
-			this.state.canvas.calcOffset();
-		this.calcOffset = () => this.state.canvas && 
-			this.state.canvas.calcOffset();
-		this.calcOffset = () => this.state.canvas && 
-			this.state.canvas.calcOffset();
-		this.calcOffset = () => this.state.canvas && 
-			this.state.canvas.calcOffset();
-		this.calcOffset = () => this.state.canvas && 
-			this.state.canvas.calcOffset();
-		this.calcOffset = () => this.state.canvas && 
-			this.state.canvas.calcOffset();
-		this.calcOffset = () => this.state.canvas && 
-			this.state.canvas.calcOffset();
-		this.calcOffset = () => this.state.canvas && 
-			this.state.canvas.calcOffset();
-		this.calcOffset = () => this.state.canvas && 
-			this.state.canvas.calcOffset();
-		this.calcOffset = () => this.state.canvas && 
-			this.state.canvas.calcOffset();
-		this.calcOffset = () => this.state.canvas && 
-			this.state.canvas.calcOffset();
-		this.calcOffset = () => this.state.canvas && 
-			this.state.canvas.calcOffset();
-		this.calcOffset = () => this.state.canvas && 
-			this.state.canvas.calcOffset();
-		this.calcOffset = () => this.state.canvas && 
-			this.state.canvas.calcOffset();
-
+		// this.calcOffset = () => this.state.canvas &&
+		// 	this.state.canvas.calcOffset();
+		// this.calcOffset = () => this.state.canvas &&
+		// 	this.state.canvas.calcOffset();
+		// this.calcOffset = () => this.state.canvas &&
+		// 	this.state.canvas.calcOffset();
+		// this.calcOffset = () => this.state.canvas &&
+		// 	this.state.canvas.calcOffset();
+		// this.calcOffset = () => this.state.canvas &&
+		// 	this.state.canvas.calcOffset();
+		// this.calcOffset = () => this.state.canvas &&
+		// 	this.state.canvas.calcOffset();
+		// this.calcOffset = () => this.state.canvas &&
+		// 	this.state.canvas.calcOffset();
+		// this.calcOffset = () => this.state.canvas &&
+		// 	this.state.canvas.calcOffset();
+		// this.calcOffset = () => this.state.canvas &&
+		// 	this.state.canvas.calcOffset();
+		// this.calcOffset = () => this.state.canvas &&
+		// 	this.state.canvas.calcOffset();
+		// this.calcOffset = () => this.state.canvas &&
+		// 	this.state.canvas.calcOffset();
+		// this.calcOffset = () => this.state.canvas &&
+		// 	this.state.canvas.calcOffset();
+		// this.calcOffset = () => this.state.canvas &&
+		// 	this.state.canvas.calcOffset();
+		// this.calcOffset = () => this.state.canvas &&
+		// 	this.state.canvas.calcOffset();
+		// this.calcOffset = () => this.state.canvas &&
+		// 	this.state.canvas.calcOffset();
+		// this.calcOffset = () => this.state.canvas &&
+		// 	this.state.canvas.calcOffset();
+		// this.calcOffset = () => this.state.canvas &&
+		// 	this.state.canvas.calcOffset();
+		// this.calcOffset = () => this.state.canvas &&
+		// 	this.state.canvas.calcOffset();
+		// this.calcOffset = () => this.state.canvas &&
+		// 	this.state.canvas.calcOffset();
+		// this.calcOffset = () => this.state.canvas &&
+		// 	this.state.canvas.calcOffset();
 
 	}
 
-	getChildContext() {
-		return {
-			canvas: this.state.canvas,
-		};
-	}
+	// getChildContext() {
+	// 	return {
+	// 		canvas: this.state.canvas,
+	// 	};
+	// }
 
 	componentWillMount() {
-		
+
 	}
 
 	componentDidMount() {
@@ -83,16 +82,20 @@ export default class Canvas extends React.Component {
 		});
 	}
 
+	getChild(index) {
+		return this.refs[`layer${index}`];
+	}
+
 	componentWillReceiveProps(nextProps) {
-		
+
 	}
 
 	componentDidUpdate(prevProps, prevState) {
-		
+
 	}
 
 	componentWillUnmount() {
-		
+
 	}
 
 	render() {
@@ -100,11 +103,11 @@ export default class Canvas extends React.Component {
 
 		return (
 			<div>
-				<canvas id={id} />
+				<canvas id={id}/>
 				{
 					React.Children.map(
-						children, 
-						(child, i) => React.cloneElement(child, {ref: `layer${i}`}))
+						children,
+						(child, i) => React.cloneElement(child, {ref: `layer${i}`, }))
 				}
 			</div>
 		);
@@ -166,4 +169,3 @@ Canvas.defaultProps = {
 	id: 'c',
 	static: false,
 };
-
