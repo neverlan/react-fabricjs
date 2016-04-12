@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import {fabric} from 'fabric-webpack';
+import diff from 'deep-diff';
 
 export default class StaticCanvas extends React.Component {
 	constructor(props, context) {
@@ -163,7 +164,30 @@ export default class StaticCanvas extends React.Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
+		if (diff(this.props.backgroundColor, nextProps.backgroundColor)) {
+			this.setBackgroundColor(nextProps.backgroundColor);
+		}
+		if (diff(this.props.backgroundImage, nextProps.backgroundImage)) {
+			this.setBackgroundImage(nextProps.backgroundImage);
+		}
 
+		if (this.props.height !== nextProps.height) {
+			this.state.canvas.setHeight(nextProps.height);
+		}
+		if (this.props.width !== nextProps.width) {
+			this.state.canvas.setHeight(nextProps.width);
+		}
+
+		if (diff(this.props.overlayColor, nextProps.overlayColor)) {
+			this.setOverlayColor(nextProps.overlayColor);
+		}
+		if (diff(this.props.overlayImage, nextProps.overlayImage)) {
+			this.setOverlayImage(nextProps.overlayImage);
+		}
+
+		if (diff(this.props.viewportTransform, nextProps.viewportTransform)) {
+			this.setViewportTransform(nextProps.viewportTransform);
+		}
 	}
 
 	componentDidUpdate(prevProps, prevState) {

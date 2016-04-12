@@ -30,10 +30,24 @@ class Example extends React.Component {
 		// circle.set('fill', 'red')
 	}
 
+	setBackgroundImage() {
+		this.refs.canvas.setBackgroundImage(
+			'http://fabricjs.com/assets/honey_im_subtle.png',
+			this.refs.canvas.renderAll,
+			{
+				originX: 'left',
+				originY: 'top',
+				crossOrigin: 'anonymous',
+				width: 300,
+				height: 300,
+			}
+		);
+	}
+
 	render() {
 		return (
 			<div className="main-container">
-				<Canvas ref="canvas" width="5000" height="5000">
+				<Canvas ref="canvas" width="5000" height="5000" >
 					<Circle
 						ref="circle"
 						radius={20}
@@ -45,7 +59,7 @@ class Example extends React.Component {
 				</Canvas>
 
 				<button onClick={this.changeColor.bind(this)}>Color</button>
-				<button >Image</button>
+				<button onClick={this.setBackgroundImage.bind(this)}>Image</button>
 			</div>
 		);
 	}
