@@ -11,7 +11,6 @@ export default class Canvas extends React.Component {
 			canvas: null,
 		};
 
-		this.refsLookup = {};
 		this.ref = {};
 
 		this.absolutePan = (point) => this.state.canvas &&
@@ -116,7 +115,6 @@ export default class Canvas extends React.Component {
 						(child, i) => React.cloneElement(child, {
 							ref: (c) => {
 								this.ref[child.ref] = c;
-								// this.refsLookup[child.ref] = `layer${i}`;
 							},
 						})
 					)

@@ -3,7 +3,6 @@
 import React, {PropTypes} from 'react';
 import FabricObject from '../base/Object.jsx';
 import {fabric} from 'fabric-webpack';
-// import diff from 'deep-diff';
 const PI = Math.PI;
 
 export default class Circle extends FabricObject {
@@ -28,17 +27,7 @@ export default class Circle extends FabricObject {
 		this.renderf = (ctx, noTransform) => this.state.object &&
 			this.state.object.render(ctx, noTransform);
 		this.complexity = () => 1;
-
 	}
-
-	// componentWillReceiveProps(nextProps) {
-	// 	const difference = diff(this.props, nextProps);
-	// 	if (difference) {
-	// 		difference.forEach(comparsion => {
-	// 			this.set(comparsion.path[0], comparsion.rhs);
-	// 		})
-	// 	}
-	// }
 
 	draw() {
 		const object = new fabric.Circle(this.props);

@@ -2,7 +2,7 @@
 
 import React from 'react';
 import {render} from 'react-dom';
-import {fabric} from 'fabric-webpack';
+// import {fabric} from 'fabric-webpack';
 
 import Canvas from 'react-fabricjs/Canvas';
 import Circle from 'react-fabricjs/shape/Circle';
@@ -24,13 +24,12 @@ class Example extends React.Component {
 		} else {
 			this.setState({color: 'blue'});
 		}
-		// this.refs.circle.set('fill', 'red')
-		// console.log(this.refs.canvas.getChild(0));
-		// this.refs.canvas.getChild(0).set('fill', 'red');
+
+		// const circle = this.refs.canvas.getChild('circle');
+		// circle.set('fill', 'red')
 	}
 
 	render() {
-		// console.log(this.state.color);
 		return (
 			<div>
 				<Canvas ref="canvas">

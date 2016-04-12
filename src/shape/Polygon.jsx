@@ -20,7 +20,7 @@ export default class Polygon extends FabricObject {
 		this.commonRender = () => this.state.object &&
 			this.state.object.commonRender();
 
-		this.complexity = () => this.props.points ? this.props.points.length : 0;
+		this.complexity = () => this.props.points ? this.props.points.length;
 
 	}
 
