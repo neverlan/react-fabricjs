@@ -1,0 +1,24 @@
+@import url(https://cdnjs.cloudflare.com/ajax/libs/normalize/4.0.0/normalize.min.css);
+
+.main-container {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+}
+
+.canvas-container {
+	box-sizing: border-box;
+	border-style: solid;
+	max-width: 100%;
+	width: 100vw;
+	height: 100vw; /* height:width ratio = 9/16 = .5625  */
+	max-height: 100vh;
+	max-width: 100vh; /* 16/9 = 1.778 */
+	margin: 0;
+	position: absolute;
+	top:0;bottom:0; /* vertical center */
+	left:0;right:0; /* horizontal center */
+
+	overflow-x: hidden;
+	overflow-y: hidden;
+}

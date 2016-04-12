@@ -42,7 +42,7 @@ var config = {
 					'css-loader?sourceMap',
 					'postcss-loader',
 				],
-				include: path.join(__dirname, 'css'),
+				include: path.join(__dirname, 'example'),
 			},
 			{
 				test: /\.scss$/,
@@ -52,7 +52,7 @@ var config = {
 					'postcss-loader',
 					'sass-loader?sourceMap&sourceMapContents',
 				],
-				include: path.join(__dirname, 'css'),
+				include: path.join(__dirname, 'example'),
 			},
 			// {
 			// 	test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,

@@ -2,6 +2,7 @@
 
 import React from 'react';
 import {render} from 'react-dom';
+import './style.scss';
 // import {fabric} from 'fabric-webpack';
 
 import Canvas from 'react-fabricjs/Canvas';
@@ -31,8 +32,8 @@ class Example extends React.Component {
 
 	render() {
 		return (
-			<div>
-				<Canvas ref="canvas">
+			<div className="main-container">
+				<Canvas ref="canvas" width="5000" height="5000">
 					<Circle
 						ref="circle"
 						radius={20}
@@ -44,6 +45,7 @@ class Example extends React.Component {
 				</Canvas>
 
 				<button onClick={this.changeColor.bind(this)}>Color</button>
+				<button >Image</button>
 			</div>
 		);
 	}
