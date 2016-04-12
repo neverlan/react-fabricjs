@@ -216,8 +216,7 @@ export default class FabricObject extends React.Component {
 	}
 
 	render() {
-		const {...props} = this.props;
-		return <div {...props} />;
+		return null;
 	}
 }
 

@@ -3,12 +3,16 @@
 import React from 'react';
 import {render} from 'react-dom';
 import './style.scss';
-// import {fabric} from 'fabric-webpack';
+import {fabric} from 'fabric-webpack';
 
 import Canvas from 'react-fabricjs/Canvas';
 import Circle from 'react-fabricjs/shape/Circle';
+import Image from 'react-fabricjs/Image';
 // import Ellipse from 'react-fabricjs/shape/Ellipse';
 // import Triangle from 'react-fabricjs/shape/Triangle';
+
+// const image = new Image();
+// image.src = "http://fabricjs.com/assets/honey_im_subtle.png";
 
 class Example extends React.Component {
 
@@ -25,29 +29,36 @@ class Example extends React.Component {
 		} else {
 			this.setState({color: 'blue'});
 		}
-
-		// const circle = this.refs.canvas.getChild('circle');
-		// circle.set('fill', 'red')
 	}
 
 	setBackgroundImage() {
-		this.refs.canvas.setBackgroundImage(
-			'http://fabricjs.com/assets/honey_im_subtle.png',
-			this.refs.canvas.renderAll,
-			{
-				originX: 'left',
-				originY: 'top',
-				crossOrigin: 'anonymous',
-				width: 300,
-				height: 300,
-			}
-		);
+		// this.refs.canvas.setBackgroundImage(
+		// 	'http://fabricjs.com/assets/honey_im_subtle.png',
+		// 	this.refs.canvas.renderAll,
+		// 	{
+		// 		originX: 'left',
+		// 		originY: 'top',
+		// 		crossOrigin: 'anonymous',
+		// 		width: 300,
+		// 		height: 300,
+		// 	}
+		// );
+
+		fabric.Image.fromURL('https://d13yacurqjgara.cloudfront.net/users/166613/screenshots/2646175/sander-squirrel.gif', (img) => {
+			this.refs.canvas.add(img);
+		});
+
 	}
 
 	render() {
 		return (
 			<div className="main-container">
-				<Canvas ref="canvas" width="5000" height="5000" >
+				<Canvas
+					ref="canvas"
+					width="1000"
+					height="1000"
+					onObjectAdded={(a) => console.log('added')}
+				>
 					<Circle
 						ref="circle"
 						radius={20}
@@ -56,6 +67,11 @@ class Example extends React.Component {
 						top={100}
 					/>
 
+					<Image
+						element={document.getElementById('my-image')}
+						width={100}
+						height={100}
+					/>
 				</Canvas>
 
 				<button onClick={this.changeColor.bind(this)}>Color</button>
@@ -64,6 +80,7 @@ class Example extends React.Component {
 		);
 	}
 }
+
 
 render(
 	<Example />,

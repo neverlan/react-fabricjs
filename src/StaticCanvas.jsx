@@ -11,8 +11,8 @@ export default class StaticCanvas extends React.Component {
 		};
 
 		// Collection
-		this.add = () => this.state.canvas &&
-			this.state.canvas.add(); // arguments
+		this.add = (...args) => this.state.canvas &&
+			this.state.canvas.add(...args);
 		this.insertAt = (object, index, nonSplicing) => this.state.canvas &&
 			this.state.canvas.insertAt(object, index, nonSplicing);
 		this.remove = () => this.state.canvas &&
@@ -154,16 +154,39 @@ export default class StaticCanvas extends React.Component {
 	componentDidMount() {
 		const canvas = new fabric.Canvas(this.props.id);
 
+		if (this.props.onBeforeRender instanceof Function) {
+			canvas.on('before:render', this.props.beforeRender);
+		}
+		if (this.props.onAfterRender instanceof Function) {
+			canvas.on('after:render', this.props.afterRender);
+		}
+		if (this.props.onCanvasCleared instanceof Function) {
+			canvas.on('canvas:cleared', this.props.canvasCleared);
+		}
+		if (this.props.onObjectAdded instanceof Function) {
+			canvas.on('object:added', this.props.objectAdded);
+		}
+		if (this.props.onObjectRemoved instanceof Function) {
+			canvas.on('object:removed', this.props.objectRemoved);
+		}
+
 		this.setState({canvas}, () => {
 			Object.keys(this.ref).forEach(key => {
 				const ref = this.ref[key];
-				const object = ref.draw();
+				const object = ref.draw(canvas);
 				canvas.add(object);
 			});
+
+			// fabric.Image.fromURL('https://d13yacurqjgara.cloudfront.net/users/166613/screenshots/2646175/sander-squirrel.gif', (img) => {
+			// 	canvas.add(img);
+			// 	this.state.canvas.renderAll();
+			// });
 		});
 	}
 
 	componentWillReceiveProps(nextProps) {
+
+		/* Options Changed */
 		if (diff(this.props.backgroundColor, nextProps.backgroundColor)) {
 			this.setBackgroundColor(nextProps.backgroundColor);
 		}
@@ -188,6 +211,10 @@ export default class StaticCanvas extends React.Component {
 		if (diff(this.props.viewportTransform, nextProps.viewportTransform)) {
 			this.setViewportTransform(nextProps.viewportTransform);
 		}
+
+		/* TODO: Children Changed */
+
+		/* TODO: Event Changed */
 	}
 
 	componentDidUpdate(prevProps, prevState) {
@@ -202,7 +229,7 @@ export default class StaticCanvas extends React.Component {
 		const {id, children} = this.props;
 		return (
 			<div>
-				<canvas id={id} width={this.props.width} height={this.props.height} style={{width: 200, height: 200}}/>
+				<canvas id={id} width={this.props.width} height={this.props.height}/>
 				{
 					this.state.canvas &&
 					React.Children.map(
@@ -257,6 +284,11 @@ StaticCanvas.propTypes = {
 	]),
 
 	id: PropTypes.string,
+	beforeRender: PropTypes.func,
+	afterRender: PropTypes.func,
+	canvasCleared: PropTypes.func,
+	objectAdded: PropTypes.func,
+	objectRemoved: PropTypes.func,
 };
 
 StaticCanvas.defaultProps = {
