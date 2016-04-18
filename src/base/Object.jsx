@@ -217,20 +217,21 @@ export default class FabricObject extends React.Component {
 				this.set(comparsion.path[0], comparsion.rhs);
 			});
 		}
+
+		this.eventChanged(nextProps);
 	}
 
-	initEvent(object) {
+	draw(canvas, object) {
+		this.setState({object}, () => {
+			canvas.add(object);
+			this.initEvent();
+		});
+	}
+
+	initEvent() {
+		const {object} = this.state;
 		if (!(object instanceof fabric.Object)) return;
 
-		// event:added
-		// event:removed
-		// event:selected
-		// event:modified
-		// event:rotating
-		// event:scaling
-		// event:moving
-		// event:mousedown
-		// event:mouseup
 		if (this.props.onAdded instanceof Function) {
 			object.on('added', this.props.onAdded);
 		}
@@ -262,10 +263,61 @@ export default class FabricObject extends React.Component {
 	}
 
 	eventChanged(nextProps) {
+		const {object} = this.state;
+		if (!(object instanceof fabric.Object)) return;
+
 		if (this.props.onAdded && !nextProps.onAdded) {
 			object.off('added');
 		} else if (nextProps.onAdded instanceof Function) {
 			object.on('added', this.props.onAdded);
+		}
+
+		if (this.props.onRemoved && !nextProps.onRemoved) {
+			object.off('removed');
+		} else if (nextProps.onRemoved instanceof Function) {
+			object.on('removed', this.props.onRemoved);
+		}
+
+		if (this.props.onSelected && !nextProps.onSelected) {
+			object.off('selected');
+		} else if (nextProps.onSelected instanceof Function) {
+			object.on('selected', this.props.onSelected);
+		}
+
+		if (this.props.onModified && !nextProps.onModified) {
+			object.off('modified');
+		} else if (nextProps.onModified instanceof Function) {
+			object.on('modified', this.props.onModified);
+		}
+
+		if (this.props.onRotating && !nextProps.onRotating) {
+			object.off('rotating');
+		} else if (nextProps.onRotating instanceof Function) {
+			object.on('rotating', this.props.onRotating);
+		}
+
+		if (this.props.onScaling && !nextProps.onScaling) {
+			object.off('scaling');
+		} else if (nextProps.onScaling instanceof Function) {
+			object.on('scaling', this.props.onScaling);
+		}
+
+		if (this.props.onMoving && !nextProps.onMoving) {
+			object.off('moving');
+		} else if (nextProps.onMoving instanceof Function) {
+			object.on('moving', this.props.onMoving);
+		}
+
+		if (this.props.onMousedown && !nextProps.onMousedown) {
+			object.off('mousedown');
+		} else if (nextProps.onMousedown instanceof Function) {
+			object.on('mousedown', this.props.onMousedown);
+		}
+
+		if (this.props.onMouseup && !nextProps.onMouseup) {
+			object.off('mouseup');
+		} else if (nextProps.onMouseup instanceof Function) {
+			object.on('mouseup', this.props.onMouseup);
 		}
 	}
 

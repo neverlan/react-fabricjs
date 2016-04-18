@@ -44,9 +44,9 @@ class Example extends React.Component {
 		// 	}
 		// );
 
-		Image.fromURL('https://d13yacurqjgara.cloudfront.net/users/166613/screenshots/2646175/sander-squirrel.gif', (img) => {
-			this.refs.canvas.add(img);
-		});
+		// Image.fromURL(, (img) => {
+		// 	this.refs.canvas.add(img);
+		// });
 
 	}
 
@@ -63,13 +63,21 @@ class Example extends React.Component {
 						radius={20}
 						fill={this.state.color}
 						left={100}
-						top={100}
+						top={50}
 					/>
 
 					<Image
-						element={document.getElementById('my-image')}
+						imgElement={document.getElementById('my-image')}
 						width={100}
 						height={100}
+					/>
+
+					<Image
+						src="http://i.imgur.com/q4fu6Ki.jpg"
+						width={100}
+						height={100}
+						left={0}
+						top={300}
 					/>
 				</Canvas>
 

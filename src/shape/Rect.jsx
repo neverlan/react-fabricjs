@@ -21,12 +21,18 @@ export default class Rect extends FabricObject {
 		this.complexity = () => 1;
 	}
 
-	draw() {
-		const object = new fabric.Rect(this.props);
-		this.setState({object});
-
-		return object;
+	draw(canvas) {
+		let object;
+		if (this.props.element instanceof Object) {
+			object = fabric.Rect.fromElement(this.props.element, this.props);
+		} else if (this.props.object instanceof Object) {
+			object = fabric.Rect.fromObject(this.props.object);
+		} else {
+			object = new fabric.Rect(this.props);
+		}
+		super.draw(canvas, object);
 	}
+
 }
 
 Rect.fromElement = (element, options) => fabric.Rect.fromElement(element, options);

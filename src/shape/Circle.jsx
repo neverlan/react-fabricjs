@@ -29,12 +29,17 @@ export default class Circle extends FabricObject {
 		this.complexity = () => 1;
 	}
 
-	draw() {
-		const object = new fabric.Circle(this.props);
-		this.initEvent(object);
-		this.setState({object});
+	draw(canvas) {
+		let object;
+		if (this.props.element instanceof Object) {
+			object = fabric.Circle.fromElement(this.props.element, this.props);
+		} else if (this.props.object instanceof Object) {
+			object = fabric.Circle.fromObject(this.props.object);
+		} else {
+			object = new fabric.Circle(this.props);
+		}
 
-		return object;
+		super.draw(canvas, object);
 	}
 
 	render() {

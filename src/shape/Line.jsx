@@ -23,11 +23,16 @@ export default class Line extends FabricObject {
 
 	}
 
-	draw() {
-		const object = new fabric.Line(this.props);
-		this.setState({object});
-
-		return object;
+	draw(canvas) {
+		let object;
+		if (this.props.element instanceof Object) {
+			object = fabric.Line.fromElement(this.props.element, this.props);
+		} else if (this.props.object instanceof Object) {
+			object = fabric.Line.fromObject(this.props.object);
+		} else {
+			object = new fabric.Line(this.props);
+		}
+		super.draw(canvas, object);
 	}
 
 }

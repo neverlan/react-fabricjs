@@ -36,23 +36,37 @@ export default class Image extends FabricObject {
 	}
 
 	draw(canvas) {
-		// console.log(this.props.element);
-		const object = new fabric.Image(this.props.element, this.props);
-		this.setState({object});
-
-		// canvas.add(object);
-		// console.log(object);
-
-		return object;
+		console.log(canvas);
+		if (typeof(this.props.src) === 'string') {
+			fabric.Image.fromURL(
+				this.props.src,
+				(instance) => super.draw(canvas, instance),
+				this.props
+			);
+		} else if (this.props.object instanceof Object) {
+			fabric.Image.fromObject(
+				this.props.object,
+				(instance) => super.draw(canvas, instance)
+			);
+		} else if (this.props.element instanceof Object) {
+			fabric.Image.fromElement(
+				this.props.element,
+				(instance) => super.draw(canvas, instance),
+				this.props
+			);
+		} else {
+			const instance = new fabric.Image(this.props.imgElement, this.props);
+			super.draw(canvas, instance);
+		}
 	}
 }
 
 Image.getSvgSrc = fabric.Image.prototype.getSrc;
 Image.css = fabric.Image.CSS_CANVAS;
-Image.fromObject = fabric.Image.fromObject;
-Image.fromURL = fabric.Image.fromURL;
+Image.fromObject = (object, callback) => fabric.Image.fromObject(object, callback);
+Image.fromURL = (url, callback, imgOptions) => fabric.Image.fromURL(url, callback, imgOptions);
+Image.fromElement = (element, callback, options) => fabric.Image.fromElement(element, callback, options);
 Image.attribute = fabric.Image.ATTRIBUTE_NAMES;
-Image.fromElement = fabric.Image.fromElement;
 Image.async = true;
 Image.pngCompression = 1;
 

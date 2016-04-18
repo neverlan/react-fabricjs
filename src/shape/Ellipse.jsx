@@ -26,11 +26,16 @@ export default class Ellipse extends FabricObject {
 		this.complexity = () => 1;
 	}
 
-	draw() {
-		const object = new fabric.Ellipse(this.props);
-		this.setState({object});
-
-		return object;
+	draw(canvas) {
+		let object;
+		if (this.props.element instanceof Object) {
+			object = fabric.Ellipse.fromElement(this.props.element, this.props);
+		} else if (this.props.object instanceof Object) {
+			object = fabric.Ellipse.fromObject(this.props.object);
+		} else {
+			object = new fabric.Ellipse(this.props);
+		}
+		super.draw(canvas, object);
 	}
 
 }

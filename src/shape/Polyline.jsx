@@ -21,12 +21,18 @@ export default class Polyline extends FabricObject {
 		this.complexity = () => this.props.points ? this.props.points.length : 0;
 	}
 
-	draw() {
-		const object = new fabric.Polyline(this.props);
-		this.setState({object});
-
-		return object;
+	draw(canvas) {
+		let object;
+		if (this.props.element instanceof Object) {
+			object = fabric.Polyline.fromElement(this.props.element, this.props);
+		} else if (this.props.object instanceof Object) {
+			object = fabric.Polyline.fromObject(this.props.object);
+		} else {
+			object = new fabric.Polyline(this.props);
+		}
+		super.draw(canvas, object);
 	}
+
 }
 
 Polyline.fromElement = (element, options) => fabric.Polyline.fromElement(element, options);

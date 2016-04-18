@@ -20,17 +20,21 @@ export default class Polygon extends FabricObject {
 		this.commonRender = () => this.state.object &&
 			this.state.object.commonRender();
 
-		this.complexity = () => this.props.points ? this.props.points.length;
+		this.complexity = () => this.props.points ? this.props.points.length : 0;
 
 	}
 
-	draw() {
-		const object = new fabric.Polygon(this.props);
-		this.setState({object});
-
-		return object;
+	draw(canvas) {
+		let object;
+		if (this.props.element instanceof Object) {
+			object = fabric.Polygon.fromElement(this.props.element, this.props);
+		} else if (this.props.object instanceof Object) {
+			object = fabric.Polygon.fromObject(this.props.object);
+		} else {
+			object = new fabric.Polygon(this.props);
+		}
+		super.draw(canvas, object);
 	}
-
 }
 
 Polygon.fromElement = (element, options) => fabric.Polygon.fromElement(element, options);

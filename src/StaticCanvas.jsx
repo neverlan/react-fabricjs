@@ -146,7 +146,7 @@ export default class StaticCanvas extends React.Component {
 			Object.keys(this.ref).forEach(key => {
 				const ref = this.ref[key];
 				const object = ref.draw(canvas);
-				canvas.add(object);
+				// canvas.add(object);
 			});
 
 			// fabric.Image.fromURL('https://d13yacurqjgara.cloudfront.net/users/166613/screenshots/2646175/sander-squirrel.gif', (img) => {
@@ -208,7 +208,7 @@ export default class StaticCanvas extends React.Component {
 						children,
 						(child, i) => React.cloneElement(child, {
 							ref: (c) => {
-								this.ref[child.ref] = c;
+								this.ref[child.ref||`layer${i}`] = c;
 							},
 						})
 					)
