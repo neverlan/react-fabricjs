@@ -8,8 +8,9 @@ import './style.scss';
 import Canvas from 'react-fabricjs/Canvas';
 import Circle from 'react-fabricjs/shape/Circle';
 import Path from 'react-fabricjs/shape/Path';
-import PathGroup from 'react-fabricjs/shape/PathGroup';
+// import PathGroup from 'react-fabricjs/shape/PathGroup';
 import Image from 'react-fabricjs/Image';
+import Text from 'react-fabricjs/Text';
 // import Ellipse from 'react-fabricjs/shape/Ellipse';
 // import Triangle from 'react-fabricjs/shape/Triangle';
 
@@ -96,6 +97,12 @@ class Example extends React.Component {
 						stroke="green"
 						strokeWidth={10}
 						opacity={0.5}
+					/>
+
+					<Text
+						text="hello world"
+						left={0}
+						top={200}
 					/>
 
 				</Canvas>
