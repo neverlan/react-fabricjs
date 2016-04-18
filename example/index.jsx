@@ -3,10 +3,12 @@
 import React from 'react';
 import {render} from 'react-dom';
 import './style.scss';
-import {fabric} from 'fabric-webpack';
+// import {fabric} from 'fabric-webpack';
 
 import Canvas from 'react-fabricjs/Canvas';
 import Circle from 'react-fabricjs/shape/Circle';
+import Path from 'react-fabricjs/shape/Path';
+import PathGroup from 'react-fabricjs/shape/PathGroup';
 import Image from 'react-fabricjs/Image';
 // import Ellipse from 'react-fabricjs/shape/Ellipse';
 // import Triangle from 'react-fabricjs/shape/Triangle';
@@ -64,6 +66,7 @@ class Example extends React.Component {
 						fill={this.state.color}
 						left={100}
 						top={50}
+						stroke="green"
 					/>
 
 					<Image
@@ -79,6 +82,15 @@ class Example extends React.Component {
 						left={0}
 						top={300}
 					/>
+
+					<Path
+						path="M 0 0 L 300 100 L 200 300 z"
+						fill="red"
+						stroke="green"
+						strokeWidth={10}
+						opacity={0.5}
+					/>
+
 				</Canvas>
 
 				<button onClick={this.changeColor.bind(this)}>Color</button>

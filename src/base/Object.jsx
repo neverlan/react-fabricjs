@@ -12,6 +12,7 @@ export default class FabricObject extends React.Component {
 		// Observable
 		observable(this);
 
+		//Object
 		this.adjustPosition = to => this.state.object &&
 			this.state.object.adjustPosition(to);
 		this.animate = (property, value) => this.state.object &&
@@ -201,13 +202,15 @@ export default class FabricObject extends React.Component {
 			this.state.object.toObject(propertiesToInclude);
 		this.toString = () => this.state.object &&
 			this.state.object.toString();
-
 		this.transform = (ctx, fromLeft) => this.state.object &&
 			this.state.object.transform(ctx, fromLeft);
 		this.translateToCenterPoint = (point, originX, originY) => this.state.object &&
 			this.state.object.translateToCenterPoint(point, originX, originY);
 		this.translateToOriginPoint = (point, originX, originY) => this.state.object &&
 			this.state.object.translateToOriginPoint(point, originX, originY);
+
+		// React
+		this.getObject = () => this.state.object;
 	}
 
 	componentWillReceiveProps(nextProps) {

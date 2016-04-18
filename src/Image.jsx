@@ -36,7 +36,6 @@ export default class Image extends FabricObject {
 	}
 
 	draw(canvas) {
-		console.log(canvas);
 		if (typeof(this.props.src) === 'string') {
 			fabric.Image.fromURL(
 				this.props.src,
