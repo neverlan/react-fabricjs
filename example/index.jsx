@@ -49,7 +49,13 @@ class Example extends React.Component {
 		// Image.fromURL(, (img) => {
 		// 	this.refs.canvas.add(img);
 		// });
+	}
 
+	setAnimation() {
+		this.refs.canvas.getChild('circle').animate('left', '+=100', {
+			onChange: () => this.refs.canvas.renderAll(),
+			onComplete: () => console.log('onComplete'),
+		});
 	}
 
 	render() {
@@ -70,6 +76,7 @@ class Example extends React.Component {
 					/>
 
 					<Image
+						ref="image"
 						imgElement={document.getElementById('my-image')}
 						width={100}
 						height={100}
@@ -95,6 +102,7 @@ class Example extends React.Component {
 
 				<button onClick={this.changeColor.bind(this)}>Color</button>
 				<button onClick={this.setBackgroundImage.bind(this)}>Image</button>
+				<button onClick={this.setAnimation.bind(this)}>Animate</button>
 			</div>
 		);
 	}

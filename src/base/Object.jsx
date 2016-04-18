@@ -15,8 +15,8 @@ export default class FabricObject extends React.Component {
 		//Object
 		this.adjustPosition = to => this.state.object &&
 			this.state.object.adjustPosition(to);
-		this.animate = (property, value) => this.state.object &&
-			this.state.object.animate(property, value);
+		this.animate = (property, value, opts) => this.state.object &&
+			this.state.object.animate(property, value, opts);
 		this.bringForward = intersecting => this.state.object &&
 			this.state.object.bringForward(intersecting);
 		this.bringToFront = () => this.state.object &&

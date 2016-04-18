@@ -145,14 +145,8 @@ export default class StaticCanvas extends React.Component {
 		this.setState({canvas}, () => {
 			Object.keys(this.ref).forEach(key => {
 				const ref = this.ref[key];
-				const object = ref.draw(canvas);
-				// canvas.add(object);
+				ref.draw(canvas);
 			});
-
-			// fabric.Image.fromURL('https://d13yacurqjgara.cloudfront.net/users/166613/screenshots/2646175/sander-squirrel.gif', (img) => {
-			// 	canvas.add(img);
-			// 	this.state.canvas.renderAll();
-			// });
 		});
 	}
 
