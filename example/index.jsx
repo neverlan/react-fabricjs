@@ -44,7 +44,7 @@ class Example extends React.Component {
 		// 	}
 		// );
 
-		fabric.Image.fromURL('https://d13yacurqjgara.cloudfront.net/users/166613/screenshots/2646175/sander-squirrel.gif', (img) => {
+		Image.fromURL('https://d13yacurqjgara.cloudfront.net/users/166613/screenshots/2646175/sander-squirrel.gif', (img) => {
 			this.refs.canvas.add(img);
 		});
 
@@ -57,7 +57,6 @@ class Example extends React.Component {
 					ref="canvas"
 					width="1000"
 					height="1000"
-					onObjectAdded={(a) => console.log('added')}
 				>
 					<Circle
 						ref="circle"

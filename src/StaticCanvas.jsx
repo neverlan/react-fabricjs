@@ -1,6 +1,8 @@
 import React, { PropTypes } from 'react';
 import {fabric} from 'fabric-webpack';
 import diff from 'deep-diff';
+import collection from './mixin/collection.js';
+import observable from './mixin/observable.js';
 
 export default class StaticCanvas extends React.Component {
 	constructor(props, context) {
@@ -10,38 +12,8 @@ export default class StaticCanvas extends React.Component {
 			canvas: null,
 		};
 
-		// Collection
-		this.add = (...args) => this.state.canvas &&
-			this.state.canvas.add(...args);
-		this.insertAt = (object, index, nonSplicing) => this.state.canvas &&
-			this.state.canvas.insertAt(object, index, nonSplicing);
-		this.remove = () => this.state.canvas &&
-			this.state.canvas.remove();// arguments
-		this.forEachObject = (callback, context) => this.state.canvas &&
-			this.state.canvas.forEachObject(callback, context);
-		this.getObjects = (type) => this.state.canvas &&
-			this.state.canvas.getObjects(type);
-		this.item = (index) => this.state.canvas &&
-			this.state.canvas.item(index);
-		this.isEmpty = () => this.state.canvas &&
-			this.state.canvas.isEmpty();
-		this.size = () => this.state.canvas &&
-			this.state.canvas.size();
-		this.contains = (object) => this.state.canvas &&
-			this.state.canvas.contains(object);
-		this.complexity = () => this.state.canvas &&
-			this.state.canvas.complexity(object);
-
-		// Observable
-		this.observe = (eventName, handler) => this.state.canvas &&
-			this.state.canvas.observe(eventName, handler);
-		this.stopObserving = (eventName, handler) => this.state.canvas &&
-			this.state.canvas.stopObserving(eventName, handler);
-		this.fire = (eventName, options) => this.state.canvas &&
-			this.state.canvas.fire(eventName, options);
-		this.on = this.observe;
-		this.off = this.stopObserving;
-		this.trigger = this.fire;
+		collection(this);
+		observable(this);
 
 		//Static Canvas
 		this.absolutePan = (point) => this.state.canvas &&
@@ -154,20 +126,20 @@ export default class StaticCanvas extends React.Component {
 	componentDidMount() {
 		const canvas = new fabric.Canvas(this.props.id);
 
-		if (this.props.onBeforeRender instanceof Function) {
+		if (this.props.beforeRender instanceof Function) {
 			canvas.on('before:render', this.props.beforeRender);
 		}
-		if (this.props.onAfterRender instanceof Function) {
+		if (this.props.afterRender instanceof Function) {
 			canvas.on('after:render', this.props.afterRender);
 		}
 		if (this.props.onCanvasCleared instanceof Function) {
-			canvas.on('canvas:cleared', this.props.canvasCleared);
+			canvas.on('canvas:cleared', this.props.onCanvasCleared);
 		}
 		if (this.props.onObjectAdded instanceof Function) {
-			canvas.on('object:added', this.props.objectAdded);
+			canvas.on('object:added', this.props.onObjectAdded);
 		}
 		if (this.props.onObjectRemoved instanceof Function) {
-			canvas.on('object:removed', this.props.objectRemoved);
+			canvas.on('object:removed', this.props.onObjectRemoved);
 		}
 
 		this.setState({canvas}, () => {
@@ -286,9 +258,9 @@ StaticCanvas.propTypes = {
 	id: PropTypes.string,
 	beforeRender: PropTypes.func,
 	afterRender: PropTypes.func,
-	canvasCleared: PropTypes.func,
-	objectAdded: PropTypes.func,
-	objectRemoved: PropTypes.func,
+	onCanvasCleared: PropTypes.func,
+	onObjectAdded: PropTypes.func,
+	onObjectRemoved: PropTypes.func,
 };
 
 StaticCanvas.defaultProps = {

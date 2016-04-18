@@ -3,10 +3,14 @@
 import React, { PropTypes } from 'react';
 import {fabric} from 'fabric-webpack';
 import diff from 'deep-diff';
+import observable from '../mixin/observable.js';
 
 export default class FabricObject extends React.Component {
 	constructor(props, context) {
 		super(props, context);
+
+		// Observable
+		observable(this);
 
 		this.adjustPosition = to => this.state.object &&
 			this.state.object.adjustPosition(to);
@@ -212,6 +216,56 @@ export default class FabricObject extends React.Component {
 			difference.forEach(comparsion => {
 				this.set(comparsion.path[0], comparsion.rhs);
 			});
+		}
+	}
+
+	initEvent(object) {
+		if (!(object instanceof fabric.Object)) return;
+
+		// event:added
+		// event:removed
+		// event:selected
+		// event:modified
+		// event:rotating
+		// event:scaling
+		// event:moving
+		// event:mousedown
+		// event:mouseup
+		if (this.props.onAdded instanceof Function) {
+			object.on('added', this.props.onAdded);
+		}
+		if (this.props.onRemoved instanceof Function) {
+			object.on('removed', this.props.onRemoved);
+		}
+		if (this.props.onSelected instanceof Function) {
+			object.on('selected', this.props.onSelected);
+		}
+		if (this.props.onModified instanceof Function) {
+			object.on('modified', this.props.onModified);
+		}
+		if (this.props.onRotating instanceof Function) {
+			object.on('rotating', this.props.onRotating);
+		}
+		if (this.props.onScaling instanceof Function) {
+			object.on('scaling', this.props.onScaling);
+		}
+		if (this.props.onMoving instanceof Function) {
+			object.on('moving', this.props.onMoving);
+		}
+		if (this.props.onMousedown instanceof Function) {
+			object.on('mousedown', this.props.onMousedown);
+		}
+		if (this.props.onMouseup instanceof Function) {
+			object.on('mouseup', this.props.onMouseup);
+		}
+
+	}
+
+	eventChanged(nextProps) {
+		if (this.props.onAdded && !nextProps.onAdded) {
+			object.off('added');
+		} else if (nextProps.onAdded instanceof Function) {
+			object.on('added', this.props.onAdded);
 		}
 	}
 

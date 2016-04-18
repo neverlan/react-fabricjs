@@ -31,6 +31,7 @@ export default class Circle extends FabricObject {
 
 	draw() {
 		const object = new fabric.Circle(this.props);
+		this.initEvent(object);
 		this.setState({object});
 
 		return object;
