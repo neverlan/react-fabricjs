@@ -39,20 +39,20 @@ var config = {
 				test: /\.css$/,
 				loaders: [
 					'style-loader',
-					'css-loader?sourceMap',
+					'css-loader',
 					'postcss-loader',
 				],
-				include: path.join(__dirname, 'css'),
+				include: path.join(__dirname, 'example'),
 			},
 			{
 				test: /\.scss$/,
 				loaders: [
 					'style-loader',
-					'css-loader?sourceMap',
+					'css-loader',
 					'postcss-loader',
-					'sass-loader?sourceMap&sourceMapContents',
+					'sass-loader',
 				],
-				include: path.join(__dirname, 'css'),
+				include: path.join(__dirname, 'example'),
 			},
 			// {
 			// 	test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
@@ -72,7 +72,6 @@ var config = {
 
 		],
 		noParse: [],
-
 	},
 	postcss: function () {
 		return [autoprefixer];

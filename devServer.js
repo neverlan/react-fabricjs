@@ -7,9 +7,7 @@ var config = require('./webpack.config.dev');
 var app = express();
 var compiler = webpack(config);
 
-// app.use('/img', express.static('./dist/img'));
-// app.use('/assets', express.static('./dist/assets'));
-// app.use('/locales', express.static('./dist/locales'));
+app.use('/img', express.static('./example/img'));
 
 app.use(require('webpack-dev-middleware')(compiler, {
 	noInfo: true,
@@ -17,18 +15,6 @@ app.use(require('webpack-dev-middleware')(compiler, {
 }));
 
 app.use(require('webpack-hot-middleware')(compiler));
-
-// app.get('/oldbrowser*', function(req, res) {
-// 	res.sendFile(path.join(__dirname, 'dist/oldbrowser.html'));
-// });
-//
-// app.get('/admin*', function(req, res) {
-// 	res.sendFile(path.join(__dirname, 'dist/admin.html'));
-// });
-//
-// app.get('/shopAdmin*', function(req, res) {
-// 	res.sendFile(path.join(__dirname, 'dist/shopAdmin.html'));
-// });
 
 app.get('*', function(req, res) {
 	res.sendFile(path.join(__dirname, 'example/index.html'));
