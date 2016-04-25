@@ -7,7 +7,32 @@ var minimize = process.argv.indexOf('--minimize') !== -1;
 var config = {
 	devtool: 'eval',
 	entry:  {
-		index: 'react-fabric.jsx'
+		// Main Bundle
+		main: './src/react-fabric.js',
+
+		// Canvas
+		StaticCanvas: ['./src/StaticCanvas.jsx'],
+		Canvas: ['./src/Canvas.jsx'],
+
+		// Object
+		Circle: ['./src/shape/Circle.jsx'],
+		Ellipse: ['./src/shape/Ellipse.jsx'],
+		Line: ['./src/shape/Line.jsx'],
+		Path: ['./src/shape/Path.jsx'],
+		PathGroup: ['./src/shape/PathGroup.jsx'],
+		Polygon: ['./src/shape/Polygon.jsx'],
+		Polyline: ['./src/shape/Polyline.jsx'],
+		Rect: ['./src/shape/Rect.jsx'],
+		Triangle: ['./src/shape/Triangle.jsx'],
+
+		Image: ['./src/Image.jsx'],
+		Text: ['./src/Text.jsx'],
+		IText: ['./src/IText.jsx'],
+
+		// utils
+		imageFilter: ['./src/ImageFilters.js'],
+		color: ['./src/Color.js'],
+
 	},
 	resolve: {
 		extensions: ["", ".jsx", ".js", ".scss"],
@@ -44,11 +69,11 @@ var config = {
 			}
 		}),
 		new webpack.optimize.DedupePlugin(),
-		new webpack.optimize.UglifyJsPlugin({
-			compressor: {
-				warnings: false
-			}
-		})
+		// new webpack.optimize.UglifyJsPlugin({
+		// 	compressor: {
+		// 		warnings: false
+		// 	}
+		// })
 	],
 	module: {
 		loaders: [

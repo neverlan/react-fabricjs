@@ -1,3 +1,5 @@
+'use strict';
+
 import React, { PropTypes } from 'react';
 import {fabric} from 'fabric-webpack';
 import diff from 'deep-diff';
