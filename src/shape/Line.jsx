@@ -23,7 +23,7 @@ export default class Line extends FabricObject {
 
 	}
 
-	draw(canvas) {
+	draw(cb) {
 		let object;
 		if (this.props.element instanceof Object) {
 			object = fabric.Line.fromElement(this.props.element, this.props);
@@ -32,7 +32,7 @@ export default class Line extends FabricObject {
 		} else {
 			object = new fabric.Line(this.props);
 		}
-		super.draw(canvas, object);
+		super.draw(object, cb);
 	}
 
 }

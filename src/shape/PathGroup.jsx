@@ -34,17 +34,17 @@ export default class PathGroup extends Path {
 
 	}
 
-	draw(canvas) {
+	draw(cb) {
 		if (this.props.element instanceof Object) {
 			fabric.PathGroup.fromElement(
 				this.props.element,
-				(instance) => super.draw(canvas, instance),
+				(instance) => super.draw(instance, cb),
 				this.props
 			);
 		} else if (this.props.object instanceof Object) {
 			fabric.PathGroup.fromObject(
 				this.props.object,
-				(instance) => super.draw(canvas, instance)
+				(instance) => super.draw(instance, cb)
 			);
 		} else {
 			const paths = [];
@@ -55,7 +55,7 @@ export default class PathGroup extends Path {
 			}
 
 			const object = new fabric.PathGroup(paths, this.props);
-			super.draw(canvas, object);
+			super.draw(object, cb);
 		}
 	}
 

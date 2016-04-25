@@ -45,7 +45,6 @@ export default class IText extends Text {
 		} else {
 			object = new fabric.IText(this.props.text, this.props);
 		}
-		console.log(object);
 
 		super.draw(canvas, object);
 	}

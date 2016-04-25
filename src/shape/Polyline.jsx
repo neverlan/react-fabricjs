@@ -21,7 +21,7 @@ export default class Polyline extends FabricObject {
 		this.complexity = () => this.props.points ? this.props.points.length : 0;
 	}
 
-	draw(canvas) {
+	draw(cb) {
 		let object;
 		if (this.props.element instanceof Object) {
 			object = fabric.Polyline.fromElement(this.props.element, this.props);
@@ -30,7 +30,7 @@ export default class Polyline extends FabricObject {
 		} else {
 			object = new fabric.Polyline(this.props);
 		}
-		super.draw(canvas, object);
+		super.draw(object, cb);
 	}
 
 }

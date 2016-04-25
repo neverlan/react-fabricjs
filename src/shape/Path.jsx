@@ -25,21 +25,21 @@ export default class Path extends FabricObject {
 			this.state.object.complexity();
 	}
 
-	draw(canvas) {
+	draw(cb) {
 		if (this.props.element instanceof Object) {
 			fabric.Path.fromElement(
 				this.props.element,
-				(instance) => super.draw(canvas, instance),
+				(instance) => super.draw(instance, cb),
 				this.props
 			);
 		} else if (this.props.object instanceof Object) {
 			fabric.Path.fromObject(
 				this.props.object,
-				(instance) => super.draw(canvas, instance)
+				(instance) => super.draw(instance, cb)
 			);
 		} else {
 			const object = new fabric.Path(this.props.path, this.props);
-			super.draw(canvas, object);
+			super.draw(object, cb);
 
 			return object;
 		}

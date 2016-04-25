@@ -24,6 +24,7 @@ class Example extends React.Component {
 		super(props, context);
 		this.state = {
 			color: 'blue',
+			newObject: null,
 		};
 	}
 
@@ -60,6 +61,24 @@ class Example extends React.Component {
 		});
 	}
 
+	addNew() {
+		if (this.state.newObject) {
+			return this.setState({newObject: null});
+		}
+		this.setState({
+			newObject: (
+				<Image
+					src="http://i.imgur.com/jZsNUCi.jpg"
+					width={300}
+					height={300}
+					left={0}
+					top={500}
+				/>
+			),
+			color: 'black',
+		});
+	}
+
 	render() {
 		return (
 			<div className="main-container">
@@ -84,13 +103,7 @@ class Example extends React.Component {
 						height={100}
 					/>
 
-					<Image
-						src="http://i.imgur.com/q4fu6Ki.jpg"
-						width={100}
-						height={100}
-						left={0}
-						top={300}
-					/>
+					{this.state.newObject}
 
 					<Path
 						path="M 0 0 L 300 100 L 200 300 z"
@@ -116,6 +129,7 @@ class Example extends React.Component {
 				<button onClick={this.changeColor.bind(this)}>Color</button>
 				<button onClick={this.setBackgroundImage.bind(this)}>Image</button>
 				<button onClick={this.setAnimation.bind(this)}>Animate</button>
+				<button onClick={this.addNew.bind(this)}>NEW</button>
 			</div>
 		);
 	}

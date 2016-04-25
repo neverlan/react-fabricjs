@@ -35,27 +35,27 @@ export default class Image extends FabricObject {
 		this.complexity = () => 1;
 	}
 
-	draw(canvas) {
+	draw(cb) {
 		if (typeof(this.props.src) === 'string') {
 			fabric.Image.fromURL(
 				this.props.src,
-				(instance) => super.draw(canvas, instance),
+				(instance) => super.draw(instance, cb),
 				this.props
 			);
 		} else if (this.props.object instanceof Object) {
 			fabric.Image.fromObject(
 				this.props.object,
-				(instance) => super.draw(canvas, instance)
+				(instance) => super.draw(instance, cb)
 			);
 		} else if (this.props.element instanceof Object) {
 			fabric.Image.fromElement(
 				this.props.element,
-				(instance) => super.draw(canvas, instance),
+				(instance) => super.draw(instance, cb),
 				this.props
 			);
 		} else {
 			const instance = new fabric.Image(this.props.imgElement, this.props);
-			super.draw(canvas, instance);
+			super.draw(instance, cb);
 		}
 	}
 }

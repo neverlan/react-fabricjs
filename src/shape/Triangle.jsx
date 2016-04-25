@@ -19,7 +19,7 @@ export default class Triangle extends FabricObject {
 		this.complexity = () => 1;
 	}
 
-	draw(canvas) {
+	draw(cb) {
 		let object;
 		if (this.props.element instanceof Object) {
 			object = fabric.Triangle.fromElement(this.props.element, this.props);
@@ -28,7 +28,7 @@ export default class Triangle extends FabricObject {
 		} else {
 			object = new fabric.Triangle(this.props);
 		}
-		super.draw(canvas, object);
+		super.draw(object, cb);
 	}
 
 }

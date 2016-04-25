@@ -21,7 +21,7 @@ export default class Rect extends FabricObject {
 		this.complexity = () => 1;
 	}
 
-	draw(canvas) {
+	draw(cb) {
 		let object;
 		if (this.props.element instanceof Object) {
 			object = fabric.Rect.fromElement(this.props.element, this.props);
@@ -30,7 +30,7 @@ export default class Rect extends FabricObject {
 		} else {
 			object = new fabric.Rect(this.props);
 		}
-		super.draw(canvas, object);
+		super.draw(object, cb);
 	}
 
 }

@@ -126,26 +126,11 @@ export default class StaticCanvas extends React.Component {
 	componentDidMount() {
 		const canvas = new fabric.Canvas(this.props.id);
 
-		if (this.props.beforeRender instanceof Function) {
-			canvas.on('before:render', this.props.beforeRender);
-		}
-		if (this.props.afterRender instanceof Function) {
-			canvas.on('after:render', this.props.afterRender);
-		}
-		if (this.props.onCanvasCleared instanceof Function) {
-			canvas.on('canvas:cleared', this.props.onCanvasCleared);
-		}
-		if (this.props.onObjectAdded instanceof Function) {
-			canvas.on('object:added', this.props.onObjectAdded);
-		}
-		if (this.props.onObjectRemoved instanceof Function) {
-			canvas.on('object:removed', this.props.onObjectRemoved);
-		}
-
 		this.setState({canvas}, () => {
+			this.initEvent.call(this);
 			Object.keys(this.ref).forEach(key => {
 				const ref = this.ref[key];
-				ref.draw(canvas);
+				ref.draw(obj => this.add(obj));
 			});
 		});
 	}
@@ -178,13 +163,92 @@ export default class StaticCanvas extends React.Component {
 			this.setViewportTransform(nextProps.viewportTransform);
 		}
 
-		/* TODO: Children Changed */
-
 		/* TODO: Event Changed */
+		this.eventChanged(nextProps);
 	}
 
 	componentDidUpdate(prevProps, prevState) {
+		/* TODO: Children Changed */
+		if (prevState.canvas) {
+			if (this.props.children instanceof Array) {
+				this.props.children.forEach((child, i) => this.childAddedrRemove(prevProps.children[i], child, i));
+			} else {
+				this.childAddedrRemove(prevProps.children, this.props.children);
+			}
+		}
+
 		this.state.canvas && this.state.canvas.renderAll();
+	}
+
+	childAddedrRemove(oldChild, child, index) {
+		if (oldChild === null && child) {
+			const ref = child.key ? this.ref[child.key] : this.ref[`layer${index}`];
+			ref.draw(obj => this.insertAt(obj, index));
+		} else if (oldChild && child === null) {
+			const key = oldChild.key;
+			const ref = key ? this.ref[key] : this.ref[`layer${index}`];
+			const obj = ref.getObject();
+
+			this.remove(obj);
+			this.ref[ref] = null;
+		}
+	}
+
+	initEvent() {
+		const {canvas} = this.state;
+		if (!canvas) return;
+
+		if (this.props.beforeRender instanceof Function) {
+			canvas.on('before:render', this.props.beforeRender);
+		}
+		if (this.props.afterRender instanceof Function) {
+			canvas.on('after:render', this.props.afterRender);
+		}
+		if (this.props.onCanvasCleared instanceof Function) {
+			canvas.on('canvas:cleared', this.props.onCanvasCleared);
+		}
+		if (this.props.onObjectAdded instanceof Function) {
+			canvas.on('object:added', this.props.onObjectAdded);
+		}
+		if (this.props.onObjectRemoved instanceof Function) {
+			canvas.on('object:removed', this.props.onObjectRemoved);
+		}
+
+	}
+
+	eventChanged(nextProps) {
+		const {canvas} = this.state;
+		if (!canvas) return;
+
+		if (this.props.beforeRender && !nextProps.beforeRender) {
+			canvas.off('before:render');
+		} else if (nextProps.beforeRender instanceof Function) {
+			canvas.on('before:render', this.props.beforeRender);
+		}
+
+		if (this.props.afterRender && !nextProps.afterRender) {
+			object.off('after:render');
+		} else if (nextProps.afterRender instanceof Function) {
+			object.on('after:render', this.props.afterRender);
+		}
+
+		if (this.props.onCanvasCleared && !nextProps.onCanvasCleared) {
+			object.off('canvas:cleared');
+		} else if (nextProps.onCanvasCleared instanceof Function) {
+			object.on('canvas:cleared', this.props.onCanvasCleared);
+		}
+
+		if (this.props.onObjectAdded && !nextProps.onObjectAdded) {
+			object.off('object:added');
+		} else if (nextProps.onObjectAdded instanceof Function) {
+			object.on('object:added', this.props.onObjectAdded);
+		}
+
+		if (this.props.onObjectRemoved && !nextProps.onObjectRemoved) {
+			object.off('object:removed');
+		} else if (nextProps.onObjectRemoved instanceof Function) {
+			object.on('object:removed', this.props.onObjectRemoved);
+		}
 	}
 
 	getChild(ref) {
@@ -200,9 +264,11 @@ export default class StaticCanvas extends React.Component {
 					this.state.canvas &&
 					React.Children.map(
 						children,
-						(child, i) => React.cloneElement(child, {
-							ref: (c) => {
-								this.ref[child.ref||`layer${i}`] = c;
+						(child, i) => child && React.cloneElement(child, {
+							ref: c => {
+								if (c) {
+									this.ref[child.ref||`layer${i}`] = c;
+								}
 							},
 						})
 					)

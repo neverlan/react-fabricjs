@@ -29,7 +29,7 @@ export default class Circle extends FabricObject {
 		this.complexity = () => 1;
 	}
 
-	draw(canvas) {
+	draw(cb) {
 		let object;
 		if (this.props.element instanceof Object) {
 			object = fabric.Circle.fromElement(this.props.element, this.props);
@@ -39,7 +39,7 @@ export default class Circle extends FabricObject {
 			object = new fabric.Circle(this.props);
 		}
 
-		super.draw(canvas, object);
+		super.draw(object, cb);
 	}
 
 	render() {

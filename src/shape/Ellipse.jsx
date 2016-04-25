@@ -26,7 +26,7 @@ export default class Ellipse extends FabricObject {
 		this.complexity = () => 1;
 	}
 
-	draw(canvas) {
+	draw(cb) {
 		let object;
 		if (this.props.element instanceof Object) {
 			object = fabric.Ellipse.fromElement(this.props.element, this.props);
@@ -35,7 +35,7 @@ export default class Ellipse extends FabricObject {
 		} else {
 			object = new fabric.Ellipse(this.props);
 		}
-		super.draw(canvas, object);
+		super.draw(object, cb);
 	}
 
 }

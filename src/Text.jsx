@@ -23,7 +23,7 @@ export default class Text extends FabricObject {
 		this.complexity = () => 1;
 	}
 
-	draw(canvas) {
+	draw(cb) {
 		let object;
 		if (this.props.object instanceof Object) {
 			object = fabric.Text.fromObject(this.props.object);
@@ -33,7 +33,7 @@ export default class Text extends FabricObject {
 			object = new fabric.Text(this.props.text, this.props);
 		}
 
-		super.draw(canvas, object);
+		super.draw(object, cb);
 	}
 }
 
