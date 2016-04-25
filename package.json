@@ -20,11 +20,11 @@
   "peerDependencies": {
     "react": "^0.14.0 || ^15.0.0",
     "react-dom": "^0.14.0 || ^15.0.0",
-    "object-assign": "^4.0.1"
   },
   "dependencies": {
     "deep-diff": "~0.3.3",
-    "fabric-webpack": "~1.6.0-rc.1"
+    "fabric-webpack": "~1.6.0-rc.1",
+    "object-assign": "~4.0.1"
   },
   "devDependencies": {
     "autoprefixer": "~6.3.1",
