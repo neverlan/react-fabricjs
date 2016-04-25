@@ -11,6 +11,7 @@ import Path from 'react-fabricjs/shape/Path';
 // import PathGroup from 'react-fabricjs/shape/PathGroup';
 import Image from 'react-fabricjs/Image';
 import Text from 'react-fabricjs/Text';
+import IText from 'react-fabricjs/IText';
 // import Ellipse from 'react-fabricjs/shape/Ellipse';
 // import Triangle from 'react-fabricjs/shape/Triangle';
 
@@ -100,11 +101,16 @@ class Example extends React.Component {
 					/>
 
 					<Text
-						text="hello world"
+						text="Click me"
 						left={0}
 						top={200}
+						shadow="rgba(0,0,0,0.3) 5px 5px 5px"
+						stroke="#ff1318"
+					  strokeWidth={1}
+						fontStyle="italic"
+					  fontFamily="Hoefler Text"
 					/>
-
+				<IText text="Edit me" top={300} left={10} />
 				</Canvas>
 
 				<button onClick={this.changeColor.bind(this)}>Color</button>

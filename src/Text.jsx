@@ -54,7 +54,7 @@ Text.propTypes = Object.assign(FabricObject.propTypes, {
 });
 
 Text.defaultProps = Object.assign(FabricObject.defaultProps, {
-	type: 'image',
+	type: 'text',
 	stateProperties: FabricObject.defaultProps.stateProperties.concat(['fontFamily',
 		'fontWeight',
 		'fontSize',
