@@ -34,3 +34,4 @@ dist/public
 reports
 chromedriver*
 lib
+*.zip
