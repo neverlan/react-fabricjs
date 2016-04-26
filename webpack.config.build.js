@@ -11,27 +11,27 @@ var config = {
 		main: './src/react-fabric.js',
 
 		// Canvas
-		StaticCanvas: ['./src/StaticCanvas.jsx'],
-		Canvas: ['./src/Canvas.jsx'],
+		// StaticCanvas: ['./src/StaticCanvas.jsx'],
+		// Canvas: ['./src/Canvas.jsx'],
 
 		// Object
-		Circle: ['./src/shape/Circle.jsx'],
-		Ellipse: ['./src/shape/Ellipse.jsx'],
-		Line: ['./src/shape/Line.jsx'],
-		Path: ['./src/shape/Path.jsx'],
-		PathGroup: ['./src/shape/PathGroup.jsx'],
-		Polygon: ['./src/shape/Polygon.jsx'],
-		Polyline: ['./src/shape/Polyline.jsx'],
-		Rect: ['./src/shape/Rect.jsx'],
-		Triangle: ['./src/shape/Triangle.jsx'],
-
-		Image: ['./src/Image.jsx'],
-		Text: ['./src/Text.jsx'],
-		IText: ['./src/IText.jsx'],
+		// Circle: ['./src/shape/Circle.jsx'],
+		// Ellipse: ['./src/shape/Ellipse.jsx'],
+		// Line: ['./src/shape/Line.jsx'],
+		// Path: ['./src/shape/Path.jsx'],
+		// PathGroup: ['./src/shape/PathGroup.jsx'],
+		// Polygon: ['./src/shape/Polygon.jsx'],
+		// Polyline: ['./src/shape/Polyline.jsx'],
+		// Rect: ['./src/shape/Rect.jsx'],
+		// Triangle: ['./src/shape/Triangle.jsx'],
+		//
+		// Image: ['./src/Image.jsx'],
+		// Text: ['./src/Text.jsx'],
+		// IText: ['./src/IText.jsx'],
 
 		// utils
-		imageFilter: ['./src/ImageFilters.js'],
-		color: ['./src/Color.js'],
+		// imageFilter: ['./src/ImageFilters.js'],
+		// color: ['./src/Color.js'],
 
 	},
 	resolve: {
