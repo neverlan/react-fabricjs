@@ -1,6 +1,6 @@
 {
   "name": "react-fabricjs",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "fabricjs implemented by react",
   "main": "lib/main.js",
   "keywords": [

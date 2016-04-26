@@ -138,6 +138,11 @@ export default class StaticCanvas extends React.Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
+		this.prevRef = {};
+		Object.keys(this.ref).forEach(key => {
+			this.prevRef[key] = this.ref[key];
+		});
+		this.ref = {};
 
 		/* Options Changed */
 		if (diff(this.props.backgroundColor, nextProps.backgroundColor)) {
@@ -171,30 +176,40 @@ export default class StaticCanvas extends React.Component {
 
 	componentDidUpdate(prevProps, prevState) {
 		/* TODO: Children Changed */
+
 		if (prevState.canvas) {
-			if (this.props.children instanceof Array) {
-				this.props.children.forEach((child, i) => this.childAddedrRemove(prevProps.children[i], child, i));
-			} else {
-				this.childAddedrRemove(prevProps.children, this.props.children);
-			}
+			React.Children.map(
+				this.props.children,
+				(child, i) => {
+					if (!child) return;
+
+					const key = child.ref ? child.ref : `layer${i}`;
+					const ref = this.ref[key];
+					ref.draw(obj => this.add(obj));
+				}
+			);
+
+			Object.keys(this.prevRef).forEach(key => {
+				const ref = this.prevRef[key];
+				this.remove(ref.getObject());
+			});
 		}
 
 		this.state.canvas && this.state.canvas.renderAll();
 	}
 
-	childAddedrRemove(oldChild, child, index) {
-		if (oldChild === null && child) {
-			const ref = child.key ? this.ref[child.key] : this.ref[`layer${index}`];
-			ref.draw(obj => this.insertAt(obj, index));
-		} else if (oldChild && child === null) {
-			const key = oldChild.key;
-			const ref = key ? this.ref[key] : this.ref[`layer${index}`];
-			const obj = ref.getObject();
-
-			this.remove(obj);
-			this.ref[ref] = null;
-		}
-	}
+	// childAddedrRemove(oldChild, child, index) {
+		// 	const ref = child.ref ? this.ref[child.ref] : this.ref[`layer${index}`];
+		// 	ref.draw(obj => this.insertAt(obj, index));
+		// } else if (oldChild && !child) {
+		// 	const key = oldChild.ref;
+		// 	const ref = key ? this.ref[key] : this.ref[`layer${index}`];
+		// 	const obj = ref.getObject();
+		//
+		// 	this.remove(obj);
+		// 	this.ref[ref] = null;
+		// }
+	// }
 
 	initEvent() {
 		const {canvas} = this.state;

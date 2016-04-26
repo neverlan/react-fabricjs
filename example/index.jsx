@@ -66,16 +66,24 @@ class Example extends React.Component {
 			return this.setState({newObject: null});
 		}
 		this.setState({
-			newObject: (
+			newObject: [
 				<Image
+					key="big"
 					src="http://i.imgur.com/jZsNUCi.jpg"
 					width={300}
 					height={300}
 					left={0}
 					top={500}
-				/>
-			),
-			color: 'black',
+				/>,
+				<Image
+					key="small"
+					src="http://i.imgur.com/jZsNUCi.jpg"
+					width={250}
+					height={250}
+					left={200}
+					top={300}
+				/>,
+			]
 		});
 	}
 
